@@ -1,3 +1,12 @@
+/* Deadline:    18-9-2018
+ * Course:      Modern Cryptography.
+ * Group:       SQL Injection
+ * Students:    Levi van der Griendt, Ismail Mahdaoui, Zi Long Zhu, Niels Zwemmer
+ * Description: This exercise belongs to week 2. This is the decryption part
+ *              for the ciphertext as provided by Coursera here:
+ * https://www.coursera.org/learn/cryptography/supplement/7mgaE/programming-assignment-2
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -67,6 +76,17 @@ int main(void) {
         key[column] = max > 0 ? cipher_dec[space][column] ^ ' ' : 0;
     }
 
+    printf("Found key: ");
+    for (int i = 0; i < 31; i++)
+        printf("%02X", key[i]);
+
+    printf("\n\nIncomplete plain text message:\n");
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 31; j++)
+            putchar(cipher_dec[i][j] ^ key[j]);
+        printf("\n");
+    }
+
     /* These are the keys we had to guess. */
     key[0] = 242;
     key[6] = 35;
@@ -77,7 +97,7 @@ int main(void) {
     key[29] = 238;
     key[30] = 48;
 
-    printf("Found key: ");
+    printf("\n\nNew key: ");
     for (int i = 0; i < 31; i++)
         printf("%02X", key[i]);
 
